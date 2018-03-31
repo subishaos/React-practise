@@ -3,7 +3,6 @@ import React from 'react'
 export default class Comment extends React.Component {
   render() {
     const {title} = this.props
-    const {id} = this.props
       return (
         <div>
           <h3>{title}</h3>

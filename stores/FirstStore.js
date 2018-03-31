@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import dispatcher from '../dispatcher';
 
  class FirstStore extends EventEmitter {
   constructor(){
@@ -25,8 +26,16 @@ import { EventEmitter } from 'events';
     })
     this.emit("change")
   }
+
+  handleAction(title){
+    this.createComment(title)
+  }
 }
 
+
 const firstStore = new FirstStore;
+dispatcher.register(firstStore.handleAction.bind(firstStore))
+window.dispatcher = dispatcher
+
 window.firstStore = firstStore
 export default firstStore
