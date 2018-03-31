@@ -1,19 +1,45 @@
 import React from 'react'
 import Comment from './Comment'
+import Form from './Form'
 
 export default class Comments extends React.Component {
+
+  constructor() {
+    super()
+    this.state =  {
+      search: "",
+      comments: ['Subi', 'Aishu', 'Julie', "Shibu", "Aru"]
+    }
+  }
+
+  updateQuery(event){
+    this.setState({search: event.target.value})
+
+  }
+
   render() {
-      const Comments = [
-        <Comment key={1} title = {'Title 1'}/>,
-        <Comment key={2} title = {'Title 2'}/>,
-        <Comment key={3} title = {'Title 3'}/>,
-        <Comment key={4} title = {'Title 4'}/>,
-        <Comment key={5} title = {'Title 5'}/>
-      ];
+    const {comments} = this.state
+    const {search} = this.state
+
+    let filteredComments = comments.filter(
+      (comment) => {
+        //Use includes looks cleaner and should be easier to remember.
+        // return comment.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+        return comment.toLowerCase().includes(search.toLowerCase());
+      }
+    );
 
 
     return(
-        <div>{Comments}</div>
+
+        <div>
+          <input type="text" value= {search} onChange={this.updateQuery.bind(this)}/>
+          {search}
+          {filteredComments.map(function(name, index){
+            return <Comment key={ index } title={name}/>;
+          })}
+          <Form/>
+        </div>
       )
   }
 }
