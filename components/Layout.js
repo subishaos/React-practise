@@ -9,6 +9,8 @@ export default class Layout extends React.Component {
           <Link to="comments" activeClassName="active">comment</Link>
           <br></br>
           <Link to="List">List</Link>
+          <br></br>
+          <Link to="flux_ex">Flux Example</Link>
           {children}
        </div>
     )
