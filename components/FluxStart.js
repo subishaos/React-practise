@@ -9,13 +9,22 @@ export default class FluxStart extends React.Component{
       comments: FirstStore.getAll()
     }
   }
+
+  componentWillMount(){
+    FirstStore.on('change', () =>{
+      this.setState({
+        comments: FirstStore.getAll()
+      })
+    })
+  }
+
   render(){
     let { comments } = this.state
+
     return(
       comments.map((comment) => {
         return <Comment key={comment.id} {...comment}/>
-      })
-
-      )
+    })
+    )
   }
 }
